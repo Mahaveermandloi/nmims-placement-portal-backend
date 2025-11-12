@@ -36,53 +36,16 @@ app.use(express.static(path.join(__dirname, "public")));
 // Serve static files from the 'uploads' directory
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// CORS configuration
-// const allowedOrigins = [
-//   "http://localhost:5173", // For local development
-//   "https://nmims-placement-website.vercel.app", // Production frontend URL
-//   "https://nmims-placement-website-git-main-mahaveermandlois-projects.vercel.app", // Preview URL if needed
-//   "https://nmims-placement-website-gshbl80qj-mahaveermandlois-projects.vercel.app", // Another preview URL if needed
-// ];
 
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-
-//     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-//   })
-// );
-
-// CORS configuration
-const allowedOrigins = [
-  "https://nmims-placement-portal.vercel.app",
-  "https://nmims-placement-portal.netlify.app",
-
-  "http://localhost:3000",
-  "http://localhost:5173",
-  "http://192.168.166.62:3000",
-  "https://nmims-placement-backend-v2.vercel.app",
-  "https://nmims-placement-portal.netlify.app/student/login"
-  // Replace with your specific frontend URL
-];
-
+// Allow all origins (⚠️ open CORS policy)
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    origin: true,          // Reflect request origin automatically
+    credentials: true,     // Allow cookies / auth headers
   })
 );
+
+
 
 // Register admin routes
 app.use("/api/admin", adminRoutes);
