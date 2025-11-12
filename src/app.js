@@ -37,23 +37,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
-const allowedOrigins = [
-  "https://nmims-placement-portal.vercel.app",
-  "https://nmims-placement-portal.netlify.app",
-  "http://localhost:3000",
-  "http://localhost:5173"
-];
-
+// Allow all origins (⚠️ open CORS policy)
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    origin: true,          // Reflect request origin automatically
+    credentials: true,     // Allow cookies / auth headers
   })
 );
 
